@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+  ToDo List
+{% endblock title %}
+
+{% block content %}
+  <h2>ToDo List</h2>
+  <ul>
+      {% for todo in todo_list %}
+        {% if todo.done %}          
+            <a href="{% url 'todo_details' todo.id %}" style="text-decoration-line: none;">
+                <li><del>{{ todo }}</del></li>
+            </a>
+        {% else %}
+            <a href="{% url 'todo_details' todo.id %}" style="text-decoration-line: none;">
+                <li>{{ todo }}</li>
+            </a>
+        {% endif %}
+      {% endfor %}
+  </ul>
+{% endblock content %}

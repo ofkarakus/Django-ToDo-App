@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Todo Details
+{% endblock title %}
+
+{% block content %}
+  {% csrf_token %}
+  <h3>Todo Details</h3>
+  <form action="">
+    {{ todo_form.as_p }}
+    <input type="button" value="Save">
+  </form>
+{% endblock content %}

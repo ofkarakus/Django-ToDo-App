@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Home Page
+{% endblock title %}
+
+{% block content %}
+    <h1>ToDo App</h1>
+    <ul>
+        <a href="{% url 'todo_list' %}"><li>ToDo List</li></a>
+    </ul>
+{% endblock content %}
