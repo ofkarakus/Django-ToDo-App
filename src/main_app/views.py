@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from main_app.models import Todo
-from main_app.forms import TodoUpdateForm
+from main_app.forms import TodoAddForm, TodoUpdateForm
 
 # Create your views here.
 
@@ -47,3 +47,18 @@ def delete_todo(request, id):
         return redirect('todo_list')
 
     return render(request, 'main_app/delete_todo.html', context)
+
+
+def add_todo(request):
+    todo_add_form = TodoAddForm()
+    context = {
+        'todo_add_form': todo_add_form
+    }
+
+    if request.method == 'POST':
+        new_todo = TodoAddForm(request.POST)
+        if new_todo.is_valid():
+            new_todo.save()
+            return redirect('todo_list')
+
+    return render(request, 'main_app/add_todo.html', context)

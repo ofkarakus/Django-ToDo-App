@@ -6,6 +6,7 @@
 
 {% block content %}
   <h2>ToDo List</h2>
+  <a href="{% url 'home' %}">Home Page</a>
   <ul>
       {% for todo in todo_list %}
         {% if todo.done %}          
