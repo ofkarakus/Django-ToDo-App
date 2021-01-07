@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+  Delete Todo
+{% endblock title %}
+
+{% block content %}
+    <form action="" method="POST">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ todo.title }}"?</p>
+        <input type="submit" value="Yes">
+        <a href="{% url 'todo_details' todo.id %}"><input type="button" value="No"></a>
+    </form>
+{% endblock content %}

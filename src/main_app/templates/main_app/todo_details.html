@@ -5,10 +5,11 @@
 {% endblock title %}
 
 {% block content %}
-  {% csrf_token %}
-  <h3>Todo Details</h3>
-  <form action="">
-    {{ todo_form.as_p }}
-    <input type="button" value="Save">
+<h3>Todo Details</h3>
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ todo_update_form.as_p }}
+    <input type="submit" value="Save">
+    <a href="{% url 'delete_todo' todo.id %}"><input type="button" value="Delete"></a>
   </form>
 {% endblock content %}

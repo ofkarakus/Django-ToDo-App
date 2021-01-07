@@ -1,6 +1,6 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from main_app.models import Todo
-from main_app.forms import TodoForm
+from main_app.forms import TodoUpdateForm
 
 # Create your views here.
 
@@ -19,9 +19,31 @@ def display_todo_list(request):
 
 def display_todo_details(request, id):
     todo = get_object_or_404(Todo, id=id)
-    todo_form = TodoForm(instance=todo)
+    todo_update_form = TodoUpdateForm(instance=todo)
+
+    # update todo details
+    if request.method == 'POST':
+        todo_updated_form = TodoUpdateForm(request.POST, instance=todo)
+        if todo_updated_form.is_valid():
+            todo_updated_form.save()
+            return redirect("todo_list")
+
     context = {
-        'todo_form': todo_form
+        'todo_update_form': todo_update_form,
+        'todo': todo
     }
 
     return render(request, 'main_app/todo_details.html', context)
+
+
+def delete_todo(request, id):
+    todo = get_object_or_404(Todo, id=id)
+    context = {
+        'todo': todo
+    }
+
+    if request.method == 'POST':
+        todo.delete()
+        return redirect('todo_list')
+
+    return render(request, 'main_app/delete_todo.html', context)
